@@ -1,0 +1,109 @@
+<html>
+    <head>
+        <title>原型继承 － JS高级技巧</title>
+    </head>
+    <body>
+        <script>
+            /*
+             * 原型继承
+             * @author fool2fish@gmail.com
+             */
+            
+            /*=====================定义雇员类=====================*/
+            (function(){
+                // 定义私有属性和方法
+                var id = 0;
+                function setId(){
+                    return id++;
+                }
+                
+                /**
+                 * 雇员类构造器
+                 */
+                function Employee(name){
+                    // 定义实例域
+                    this.id = setId();
+                    this.name = name;
+                }
+                
+                // 定义实例方法
+                Employee.prototype.getId = function(){
+                    return this.id;
+                }
+                
+                Employee.prototype.toString = function(){
+                    return 'id=' + this.id + ';name=' + this.name;
+                }
+                
+                // 导出类
+                window.Employee = Employee;
+            })();
+            
+            /*=====================定义前端开发类=====================*/
+            (function(){
+                /*--------------------构造器--------------------*/
+                /**
+                 * 前端开发类构造器
+                 */
+                function Fed(name){
+                    // 继承雇员类构造方法
+                    Employee.call(this, name);
+                    // 定义自己的实例域
+                    this.skill = 'JavaScript';
+                }
+                
+                /*--------------------实现继承--------------------*/
+                // 继承雇员类的实例方法
+                // 提问：在本例中，使用原型继承会有什么问题？
+                Fed.prototype = new Employee();
+                // 提问：以下for语句解决什么问题？
+                for(var i in Fed.prototype){
+                    if(typeof Fed.prototype != 'function'){
+                        delete Fed.prototype[i];
+                    }
+                }
+                // 指定构造器
+                Fed.prototype.constructor = Fed;
+                // 指定超类
+                Fed.prototype.superClass = Employee;
+                
+                /*--------------------定义实例方法--------------------*/
+                Fed.prototype.write = function(){
+                    alert(this.name + ' write JavaScript.');
+                }
+                // 覆盖原型方法
+                Fed.prototype.toString = function(){
+                    return this.superClass.prototype.toString.call(this) + ';skill=' + this.skill;
+                }
+                
+                // 导出类
+                window.Fed = Fed;
+                
+            })();
+            
+            // 实例化
+            var chenyu = new Employee('chenyu');
+            alert(chenyu);
+            
+            var fool2fish = new Fed('fool2fish');
+            alert(fool2fish);
+            alert(fool2fish.getId());
+            alert(fool2fish instanceof Employee);
+            
+            
+            
+            
+            
+            
+            /*
+             * 知识点
+             * 1、原型继承的基本原理是把当前类的原型指向一个新创建的父类实例
+             * 2、如果在父类构造器中有全局数据处理，该继承方式会有问题
+             * 3、原则上只继承方法
+             * 4、prototype.constructor 指向当前类的构造器
+             * 5、可以定义prototype.superClass 指向其父类
+             * 6、还可以模拟实现接口的继承
+             */
+        </script>
+    </body>
+</html>

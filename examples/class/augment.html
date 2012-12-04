@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <title>混入 － JS高级技巧</title>
+    </head>
+    <body>
+        <script>
+            /*
+             * 混入
+             * @author fool2fish@gmail.com
+             */
+            
+            /*=====================定义原型混入=====================*/
+            /**
+             * 原型混入实现继承
+             * 
+             * @param {Function}         target  目标对象
+             * @param {Object}  source  源对象
+             */
+            function augment(target, source){
+                for(var i in source){
+                    if(typeof source[i] == 'function'){
+                        target.prototype[i] = source[i];
+                    }
+                }
+            }
+            
+            /*=====================定义前端开发类=====================*/
+            (function(){
+                /**
+                 * 前端开发类构造器
+                 */
+                function Fed(name){
+                    this.name = name;
+                    this.skill = 'JavaScript';
+                }
+                
+                // 混入
+                augment(Fed,{
+                    write:function(){
+                        alert(this.name + ' write JavaScript.');
+                    },
+                    toString:function(){
+                        return 'name=' + this.name + ';skill=' + this.skill;
+                    }
+                })
+                
+                // 导出类
+                window.Fed = Fed;
+            })();
+            
+            // 实例化
+            var chenyu = new Fed('chenyu');
+            chenyu.write();
+            alert(chenyu);
+            
+            
+            
+            
+            
+            /*
+             * 知识点
+             * 1、混入有两中：augment实现原型方法扩展，mixin实现类方法扩展
+             */
+        </script>
+    </body>
+</html>

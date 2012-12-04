@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <title>重载 － JS高级技巧</title>
+    </head>
+    <body>
+        <script>
+            /*
+             * 重载
+             * @author fool2fish@gmail.com
+             */
+             
+            /**
+             * ajax
+             * 
+             * @param {String}   method 方法，可选'get'和'post'
+             * @param {String}   url    路径
+             * @param {String}   params 参数
+             * @param {Function} cb     回调函数
+             * 
+             * @example
+             *      ajax(method, url, params, cb)
+             *      和
+             *      ajax(cfg)
+             *      均可调用
+             */
+            function ajax(method, url, params, cb){
+                if(arguments.length == 4){
+                    alert('通过 ajax(method, url, params, cb) 的方式调用。');
+                }else{
+                    alert('通过 ajax(cfg) 的方式调用。');
+                }
+            }
+            
+            // 通过 ajax(method, url, params, cb) 的方式调用
+            ajax(
+                'get',
+                'http://fool2fish.cn',
+                'name=chenyu',
+                function(o){return true}
+            );
+            
+            // 通过 ajax(cfg) 的方式调用
+            ajax({
+                method:'get',
+                url:'http://fool2fish.cn',
+                params:'name=chenyu',
+                cb:function(o){return true}
+            });
+            
+            
+            
+            
+            
+            /*
+             * 知识点
+             * 1、JS通过参数的个数、类型等方式实现函数的重载
+             * 2、由于JS自身不支持重载，所以重载的文档难以处理
+             */
+        </script>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>apply － JS高级技巧</title>
+    </head>
+    <body>
+        <script>
+            /*
+             * apply
+             * @author fool2fish@gmail.com
+             */
+            
+            // 定义一个 java 程序员类
+            function Javaer(name){
+                this.name = name;
+                this.skill = 'java';
+            }
+            Javaer.prototype.write = function(){
+                alert(this.name + ' write java.');
+            }
+            
+            // 定义一个前端开发类
+            function Fed(name){
+                this.name = name;
+                this.skill = 'JavaScript';
+            }
+            Fed.prototype.write = function(){
+                alert(this.name + ' write JavaScript.')
+            }
+            
+            // 实例化两个类
+            var javaer = new Javaer('朱棣');
+            var fed = new Fed('沉鱼');
+            
+            // 让开发前端起来
+            alert(javaer.name + '\'s skill is ' + javaer.skill);
+            fed.write.apply(javaer);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>this － JS高级技巧</title>
+    </head>
+    <body>
+        <script>
+            /*
+             * this
+             * @author fool2fish@gmail.com
+             */
+            
+            alert(this);
+            
+            function fn(){
+                alert(this);
+                
+                (function innerFn(){
+                    alert(this);
+                })();
+            }
+            
+            fn();
+            
+            new fn();
+            
+            
+            
+            
+            
+            /*
+             * 知识点
+             * 1、全局对象的 this 指向 window
+             * 2、匿名函数的 this 也指向 window
+             * 3、new fn() 创建了一个对象，函数体内的 this 则指向新创建的这个对象
+             * 4、由于语言的动态性，this 的指向在不同的情况下可能不一样
+             */
+        </script>
+    </body>
+</html>

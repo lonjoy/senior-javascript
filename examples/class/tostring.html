@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>toString － JS高级技巧</title>
+    </head>
+    <body>
+        <script>
+            /*
+             * toString
+             * @author fool2fish@gmail.com
+             */
+            
+            /**
+             * 前端开发类
+             * 
+             * @param {String} name 姓名
+             */
+            function Fed(name){
+                // 定义实例域
+                this.name = name;
+                this.skill = 'JavaScript';
+            }
+            // 定义实例方法
+            Fed.prototype.write = function(){
+                alert(this.name + ' write JavaScript.')
+            }
+            Fed.prototype.toString = function(){
+                return 'name=' + this.name + ';skill=' + this.skill;
+            }
+            
+            // 实例化
+            var chenyu = new Fed('chenyu');
+            alert(chenyu);
+            
+            
+            
+            
+            
+            /*
+             * 知识点
+             * 1、当对象需要转换成字符串时，将自动执行 toString() 方法
+             * 2、除此之外，equals(),compareTo()方法也非常有用
+             */
+        </script>
+    </body>
+</html>

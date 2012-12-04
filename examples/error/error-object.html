@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>Error对象 － JS高级技巧</title>
+    </head>
+    <body>
+        <script>
+            /*
+             * Error 对象
+             * 
+             * @author fool2fish@gmail.com
+             */
+            try{
+                throw new Error('an error');
+            }catch(e){
+                console.log(e); // e 不能用 for...in 遍历
+                console.log(e.stack || e.stacktrace || '');
+                console.log('error name: ' + e.name);
+                console.log('error message: ' + e.message);
+            }
+            
+            //throw new Error('an error');
+            
+        </script>
+    </body>
+</html>

@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>事件流 － JS高级技巧</title>
+        <style>
+            body{padding:10px;font-size:32px;border:2px solid #ccc;}
+            div{margin:10px;padding:10px;border:2px dashed #f60;}
+            p{margin:10px;padding:10px;border:2px solid #80C269;}
+            span{border:2px dashed #04c;}
+        </style>
+        <script src="http://a.tbcdn.cn/s/kissy/1.2.0/kissy-min.js"></script>
+    </head>
+    <body id="body">
+    document body
+        <div id="div">
+            a div
+            <p id="p">
+                a paragraph
+                <span id="span">
+                    a span
+                </span>
+            </p>
+        </div>
+        <script>
+            /*
+             * 事件流
+             * @author fool2fish@gmail.com
+             */
+            
+            KISSY.ready(function(S){
+                
+                function clickHander(ev){
+                    alert('注册事件的元素id是：' + ev.currentTarget.id + ', 触发事件的元素id是：' + ev.target.id + '。');
+                }
+                
+                S.Event.on('#body', 'click', clickHander);
+                S.Event.on('#div', 'click', clickHander);
+                S.Event.on('#p', 'click', clickHander);
+                S.Event.on('#span', 'click', clickHander);
+            })
+        </script>
+    </body>
+</html>

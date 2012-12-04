@@ -1,0 +1,55 @@
+<html>
+    <head>
+        <title>静态属性和方法 － JS高级技巧</title>
+    </head>
+    <body>
+        <script>
+            /*
+             * 静态属性和方法
+             * @author fool2fish@gmail.com
+             */
+            
+            /**
+             * 前端开发类
+             * 
+             * @param {String} name 姓名
+             */
+            function Fed(name){
+                // 定义实例域
+                this.id = Fed.setId();
+                this.name = name;
+                this.skill = 'JavaScript';
+            }
+            
+            // 定义实例方法
+            Fed.prototype.write = function(){
+                alert(this.name + ' write JavaScript.')
+            }
+            Fed.prototype.toString = function(){
+                return 'id=' + this.id + ';name=' + this.name + ';skill=' + this.skill;
+            }
+            
+            // 定义静态属性和方法
+            Fed.id = 0;
+            Fed.setId = function(){
+                return Fed.id++;
+            }
+            
+            // 实例化
+            var chenyu = new Fed('chenyu');
+            alert(chenyu);
+            
+            var fool2fish = new Fed('fool2fish');
+            alert(fool2fish);
+            
+            
+            
+            
+            
+            /*
+             * 知识点
+             * 1、function 本身也可以有属性，可被用来做类的静态属性和方法
+             */
+        </script>
+    </body>
+</html>

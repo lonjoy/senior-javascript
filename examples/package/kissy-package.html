@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>kissy的模块实现 － JS高级技巧</title>
+        <script src="http://a.tbcdn.cn/s/kissy/1.2.0/kissy-min.js"></script>
+        <script src="kissy-package-config.js"></script>
+    </head>
+    <body>
+        <script>
+            /*
+             * kissy的模块实现
+             * @author fool2fish@gmail.com
+             */
+            
+            // 模块使用
+            KISSY.use('dev2fed/fed',function(S, Fed){
+                // 实例化对象
+                var chenyu = new Fed('chenyu');
+                chenyu.write();
+                alert(chenyu);
+            })
+        </script>
+    </body>
+</html>

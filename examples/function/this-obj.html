@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>this － JS高级技巧</title>
+    </head>
+    <body>
+        <script>
+            /*
+             * this
+             * @author fool2fish@gmail.com
+             */
+            
+            var TOP = {
+                init:function(){
+                    // some init code here
+                    this.log('TOP.init() excuted');
+                },
+                log:function(msg){
+                    if(console){
+                        console.log(msg);
+                    }else{
+                        alert(msg);
+                    }
+                }
+            }
+            
+            // 直接运行
+            TOP.init();
+            
+            // 赋值后运行
+            var init = TOP.init;
+            init();
+            
+        </script>
+    </body>
+</html>

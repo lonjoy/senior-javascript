@@ -1,0 +1,137 @@
+<html>
+    <head>
+        <title>自定义事件 － JS高级技巧</title>
+        <style>
+            body{font-size:32px;}
+            button{font-size:32px;}
+        </style>
+        <script src="http://a.tbcdn.cn/s/kissy/1.2.0/kissy-min.js"></script>
+    </head>
+    <body id="body">
+        <button id="button">i am a link, click me!</button><br/>
+        <span id="span"></span>
+        <script>
+            /*
+             * 简单的自定义事件
+             * 
+             * @author fool2fish@gmail.com
+             */
+            (function(){
+                /**
+                 * 对象上添加的监听事件对象。
+                 * 
+                 * @private
+                 * @example
+                 * listeners = {
+                 *     id:{
+                 *         eventName:[fn,...]
+                 *     }
+                 * }
+                 */
+                var listeners = {};
+                
+                /**
+                 * 定义自定义事件静态类
+                 */
+                var customEvent = {
+                    /**
+                     * 添加事件监听。
+                     * 
+                     * @param {String}    id  标记
+                     * @param {String}    ev  要监听的事件名
+                     * @param {Function}  fn  要绑定的函数
+                     */
+                    add:function(id, ev, fn){
+                        if(!listeners[id]){
+                            listeners[id] = {};
+                        }
+                        if(!listeners[id][ev]){
+                            listeners[id][ev] = [];
+                        }
+                        listeners[id][ev].push(fn);
+                    },
+                    
+                    /**
+                     * 移除事件监听。
+                     * 
+                     * @param {String}   id  标记
+                     * @param {String}   ev  要监听的事件名
+                     * @param {Function} fn  绑定的函数
+                     */
+                    remove:function(id, ev, fn){
+                        if(!listeners[id]){
+                            return;
+                        }
+                        if(!listeners[id][ev]){
+                            return;
+                        }
+                        var fns = listeners[id][ev];
+                        for(var i = 0, len = fns.length; i<len; i++){
+                            if(fns[i] == fn){
+                                fns.splice(i,1);
+                                return;
+                            }
+                        }
+                    },
+                    
+                    /**
+                     * 释放自定义事件
+                     * 
+                     * @param {String}    id   标识，组件id。
+                     * @param {String}    ev   监听的事件名。
+                     * @param {Function}  data 释放的时候传递的数据，作为监听的回调函数的唯一参数。
+                     */
+                    fire:function(id, ev, data){
+                        if(listeners[id] && listeners[id][ev]){
+                            var fns = listeners[id][ev];
+                            for(var i = 0, len = fns.length; i<len; i++){
+                                fns[i](data);
+                            }
+                        }
+                    }
+    
+                }
+                
+                // 导出类
+                window.customEvent = customEvent;
+            })();
+            
+            
+            KISSY.ready(function(S){
+                
+                // 为按钮添加单击事件监听
+                var times = 1;
+                S.Event.on('#button', 'click', function(ev){
+                    S.get('#span').innerHTML = 'clicked for ' + times + ' times !';
+                   
+                    // 触发每3次点击的事件
+                    if(times%3 == 0){
+                        customEvent.fire('button', 'threeClick', {'times':times})
+                    }
+                    
+                    times++;
+                });
+                
+                // 为按钮添加3次点击事件监听
+                customEvent.add('button', 'threeClick', function(ev){
+                    alert('第 ' + ev.times + ' 次点击触发的 三次点击 事件。');
+                    // 当第6次点击之后移除该监听
+                    if(ev.times == 6){
+                        customEvent.remove('button', 'threeClick', Arguments.callee);
+                    }
+                });
+                
+            })
+            
+            
+            
+            
+            
+            /*
+             * 提问
+             * 1、如何实现自定义DOM事件，比如threeclick
+             * 2、如何实现通过构造函数创建的对象的自定义事件
+             */
+        </script>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>作用域 － JS高级技巧</title>
+    </head>
+    <body>
+        <script>
+            /*
+             * 作用域
+             * @author fool2fish@gmail.com
+             */
+            var a = 'global-a';
+            var b = 'global-b';
+            
+            function scopeTest(){
+                
+                alert('a = ' + a);
+                alert('b = ' + b);
+                
+                var a = 'local-a';
+                    b = 'local-b';
+                var c = 'local-c';
+                
+                alert('a = ' + a);
+                alert('b = ' + b);
+            }
+            scopeTest();
+            
+            alert('a = ' + a);
+            alert('b = ' + b);
+            alert('c = ' + c);
+            
+            
+            
+            
+            
+            /*
+             * 知识点
+             * 1、全局作用域与函数作用域
+             * 2、同名局部作用域优先
+             * 3、对 var 的处理
+             * 4、操作未生命的变量会报错
+             */
+        </script>
+    </body>
+</html>

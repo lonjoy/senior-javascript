@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>定义类 － JS高级技巧</title>
+    </head>
+    <body>
+        <script>
+            /*
+             * 定义类
+             * @author fool2fish@gmail.com
+             */
+            
+            /**
+             * 前端开发类
+             * 
+             * @param {String} name 姓名
+             */
+            function Fed(name){
+                // 定义实例域
+                this.name = name;
+                this.skill = 'JavaScript';
+            }
+            // 定义实例方法
+            Fed.prototype.write = function(){
+                alert(this.name + ' write JavaScript.')
+            }
+            
+            // 实例化
+            var chenyu = new Fed('chenyu');
+            chenyu.write();
+            
+            // alert(chenyu);
+            
+            
+            
+            
+            
+            /*
+             * 知识点
+             * 1、使用构造函数来创建实例
+             * 2、原型用于定义类方法（注意：通常并不在原型上定义属性）
+             */
+        </script>
+    </body>
+</html>

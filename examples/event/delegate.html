@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>事件代理 － JS高级技巧</title>
+        <style>
+            body{font-size:32px;}
+            ul{padding:10px;border:2px solid #ccc;}
+            li{margin:10px;padding:10px;border:2px dashed #f60;}
+            .del{float:right;color:#04c;cursor:pointer;}
+        </style>
+        <script src="http://a.tbcdn.cn/s/kissy/1.2.0/kissy-min.js"></script>
+    </head>
+    <body>
+        <ul id="ul"></ul>
+        <script>
+            /*
+             * 事件代理
+             * @author fool2fish@gmail.com
+             */
+            
+            KISSY.ready(function(S){
+                // 生成列表
+                var inner = '';
+                for(var i = 0; i < 5; i++){
+                    inner += '<li class="li">'+ i +'. 我是一个列表<span class="del">删除<\/span><\/li>';
+                }
+                S.get('#ul').innerHTML = inner;
+                
+                // 通过事件代理的方式实现删除操作
+                S.Event.on('#ul', 'click', function(ev){
+                    var target = ev.target;
+                    if(target.className == 'del'){
+                        var parent = target.parentNode;
+                        var grandParent = parent.parentNode;
+                        grandParent.removeChild(parent);
+                    }
+                });
+            })
+        </script>
+    </body>
+</html>

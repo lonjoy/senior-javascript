@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>ie错误（未找到成员） － JS高级技巧</title>
+    </head>
+    <body>
+        <script>
+            /*
+             * ie错误（未找到成员）
+             * 
+             * @author fool2fish@gmail.com
+             */
+            
+            // 如果事件对象被销毁后，又给该对象赋值，就会导致未找到成员错误。
+            // 其他浏览器下代码无效，但不报错。
+            document.onclick = function(){
+                var ev = window.event;
+                setTimeout(function(){
+                    ev.returnValue = false;
+                },1000);
+            }
+        </script>
+    </body>
+</html>

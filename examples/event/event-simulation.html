@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <title>事件模拟 － JS高级技巧</title>
+        <style>
+            body{font-size:32px;}
+            button{font-size:32px;}
+        </style>
+        <script src="http://a.tbcdn.cn/s/kissy/1.2.0/kissy-min.js"></script>
+    </head>
+    <body id="body">
+        <button id="button">i am a link, click me!</button>
+        <script>
+            /*
+             * 事件模拟
+             * 注意：ie8及更低版本的ie使用的另一套类似的实现方式
+             * 
+             * @author fool2fish@gmail.com
+             */
+            KISSY.ready(function(S){
+                
+                // 为按钮添加单击事件监听
+                var times = 1;
+                S.Event.on('#button', 'click', function(ev){
+                    alert('you clicked me for ' + times++ + ' times !');
+                });
+                
+                // 延迟3秒触发模拟的按钮单击事件
+                setTimeout(function(){
+                    // 获取按钮对象
+                    var btn = S.get('#button');
+                    
+                    // 创建事件对象
+                    var ev = document.createEvent('MouseEvents');
+                    
+                    // 初始化事件对象
+                    ev.initMouseEvent(
+                        'click', // type:触发的事件类型
+                        true, // bubbles:是否支持冒泡（通常为true）
+                        true, // cancelable:是否可取消（为精确模拟，应设为true）
+                        document.defaultView, // view:与事件关联的视图（几乎总是要设置为 document.defaultView）
+                        0, // detail:与事件相关的详细信息（通常设为0）
+                        0, // screenX:事件相对于屏幕的X坐标（好像这4个值设成任意值都不影响事件的触发，但对于需要计算位置的数据有影响）
+                        0, // screenY:事件相对于屏幕的Y坐标
+                        0, // clientX:事件相对于视图窗口的X坐标
+                        0, // clientY:事件相对于试图窗口的Y坐标
+                        false, // ctrlKey
+                        false, // altKey
+                        false, // shiftKey
+                        false, // metaKey
+                        0, // button:表示按下了哪个鼠标键
+                        null // relatedTarget:表示与事件相关的对象。这个参数只在模拟 mouseover 或 mouseout 时使用
+                    );
+                    
+                    // 触发事件
+                    btn.dispatchEvent(ev);
+                },3000);
+            })
+        </script>
+    </body>
+</html>

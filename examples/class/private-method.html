@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <title>私有属性和方法 － JS高级技巧</title>
+    </head>
+    <body>
+        <script>
+            /*
+             * 私有属性和方法
+             * @author fool2fish@gmail.com
+             */
+            (function(){
+                // 定义私有属性和方法
+                var id = 0;
+                function setId(){
+                    return id++;
+                }
+                
+                /**
+                 * 前端开发类
+                 * 
+                 * @param {String} name 姓名
+                 */
+                function Fed(name){
+                    // 定义实例域
+                    this.id = setId();
+                    this.name = name;
+                    this.skill = 'JavaScript';
+                }
+                
+                // 定义实例方法
+                Fed.prototype.write = function(){
+                    alert(this.name + ' write JavaScript.')
+                }
+                Fed.prototype.toString = function(){
+                    return 'id=' + this.id + ';name=' + this.name + ';skill=' + this.skill;
+                }
+                
+                window.Fed = Fed;
+                
+            })();
+            
+            // 实例化
+            var chenyu = new Fed('chenyu');
+            alert(chenyu);
+            
+            var fool2fish = new Fed('fool2fish');
+            alert(fool2fish);
+            
+            
+            
+            
+            
+            
+            /*
+             * 知识点
+             * 1、通常可以使用下划线来标明私有属性和方法
+             * 2、使用闭包可以实现真正的私有化
+             */
+        </script>
+    </body>
+</html>

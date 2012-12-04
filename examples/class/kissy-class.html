@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <title>kissy的类实现 － JS高级技巧</title>
+        <script src="http://a.tbcdn.cn/s/kissy/1.2.0/kissy-min.js"></script>
+    </head>
+    <body>
+        <script>
+            /*
+             * kissy的类实现
+             * @author fool2fish@gmail.com
+             */
+            
+            // 模块定义
+            KISSY.add('dev2fed/fed',function(S){
+                
+                /**
+                 * step1 声明类
+                 * 
+                 * @param {String} name 姓名
+                 */
+                function Fed(name){
+                    // step1.1 参数处理
+                    // name = name || defaultConfig.name;
+                    
+                    // step1.2 属性赋值
+                    this.name = name;
+                    this.skill = 'JavaScript';
+                    
+                    // step1.3 初始化操作
+                    // this.init();
+                }
+                
+                // step2 原型继承
+                // S.extend(Fed, Employee);
+
+                // step3 原型混入
+                S.augment(Fed, S.EventTarget, {
+                    write:function(){
+                        alert(this.name + ' write JavaScript.');
+                    },
+                    toString:function(){
+                        return 'name=' + this.name + ';skill=' + this.skill;
+                    }
+                    // _privateMethod:function(){}
+                })
+                
+                // step4 默认配置（如果有的话）
+                // var defautConfig = {...}
+                
+                // step5 导出类
+                return Fed;
+                
+            },{
+                requires:[] // 指定模块依赖（如果有的话）
+            });
+            
+            
+            // 模块使用
+            KISSY.use('dev2fed/fed',function(S, Fed){
+                // 实例化对象
+                var chenyu = new Fed('chenyu');
+                chenyu.write();
+                alert(chenyu);
+            })
+            
+            
+            
+            
+            
+            /*
+             * 知识点
+             * 1、请使用推荐的顺序来创建类
+             */
+        </script>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>惰性载入函数 － JS高级技巧</title>
+    </head>
+    <body>
+        <script>
+            /*
+             * 惰性载入函数 － 浏览器特性探测
+             * @author fool2fish@gmail.com
+             */
+             
+            
+            /**
+             * 实现窗口之间的通讯
+             * 支持window.postMessage的使用window.postMessage实现
+             * 不支持的使用flash实现
+             */
+            function postMsg(msg, to){
+                // 特性探测以决定当前页面的真正实现方式
+                if(window.postMessage){
+                    postMsg = html5PostMsg;
+                }else{
+                    postMsg = flashPostMsg;
+                }
+                postMsg(msg, to);
+            }
+            
+            // 支持html5的实现
+            function html5PostMsg(msg, to){
+                alert('html5 post message:' + msg);
+                // 真正的postMessage应该是：to.postMessage(msg, '*');
+            }
+            
+            // 不支持html5的flash实现
+            function flashPostMsg(msg, to){
+                alert('flash post message:' + msg);
+            }
+            
+            postMsg('test', window);
+            
+            alert(postMsg);
+            
+        </script>
+    </body>
+</html>

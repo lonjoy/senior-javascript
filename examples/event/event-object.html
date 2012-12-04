@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>事件对象 － JS高级技巧</title>
+        <style>
+            body{padding:10px;font-size:32px;border:2px solid #ccc;}
+            div{margin:10px;padding:10px;border:2px dashed #f60;}
+            p{margin:10px;padding:10px;border:2px solid #80C269;}
+            a{border:2px dashed #04c;}
+        </style>
+        <script src="http://a.tbcdn.cn/s/kissy/1.2.0/kissy-min.js"></script>
+    </head>
+    <body id="body">
+    document body
+        <div id="div">
+            a div
+            <p id="p">
+                a paragraph
+                <a id="a" href="http://fool2fish.cn">
+                    i am a link, click me!
+                </a>
+            </p>
+        </div>
+        <script>
+            /*
+             * 事件流
+             * @author fool2fish@gmail.com
+             */
+            
+            KISSY.ready(function(S){
+                S.Event.on('#a', 'click', function(ev){
+                    alert(
+                        '触发事件的对象id：' + ev.target.id + 
+                        '\n\r事件类型：' + ev.type + 
+                        '\n\r注意：默认事件被阻止');
+                    ev.preventDefault();
+                });
+            })
+        </script>
+    </body>
+</html>

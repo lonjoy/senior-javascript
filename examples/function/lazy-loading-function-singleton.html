@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>惰性载入函数 － JS高级技巧</title>
+    </head>
+    <body>
+        <script>
+            /*
+             * 惰性载入函数 － 单例
+             * @author fool2fish@gmail.com
+             */
+             
+            
+            /**
+             * 创建一个单例对象
+             * 
+             * 第一次运行时会先创建这个对象再
+             * 然后重定义函数，使得之后运行的函数都直接返回该对象
+             */
+            function createSingletonObject(){
+                var obj = {name:'chenyu'};
+                createSingletonObject = function(){return obj};
+                return obj;
+            }
+            
+            // 未运行过的函数定义
+            alert(createSingletonObject);
+            
+            var a = createSingletonObject();
+            
+            // 运行过一次的函数定义
+            alert(createSingletonObject);
+            
+            var b = createSingletonObject();
+            
+            // 运行过两次的函数定义
+            alert(createSingletonObject);
+            
+            // 检验两次生成的对象是否相等
+            alert(a == b);
+            
+            
+            
+            
+            
+            /*
+             * 问
+             * 如何实现 new CreateSingletonObject() 形式的单例模式？
+             */
+            
+            /*
+             * 知识点
+             * 1、函数可以动态的定义
+             * 2、通过动态改变函数定义，可以减少分支检测的开销、实现单例模式等
+             */
+        </script>
+    </body>
+</html>
